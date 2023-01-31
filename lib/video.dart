@@ -161,7 +161,7 @@ class _VideoState extends State<Video> {
     if (oldWidget.url != widget.url ||
         oldWidget.title != widget.title ||
         oldWidget.subtitle != widget.subtitle ||
-        oldWidget.speed != widget.speed ||
+
 
         oldWidget.isLiveStream != widget.isLiveStream ||
         oldWidget.artworkUrl != widget.artworkUrl) {
