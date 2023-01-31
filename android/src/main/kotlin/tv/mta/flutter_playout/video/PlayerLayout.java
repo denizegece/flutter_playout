@@ -202,7 +202,7 @@ public class PlayerLayout extends PlayerView implements FlutterAVPlayer, EventCh
 
             this.position = Double.valueOf(args.getDouble("position")).intValue();
 
-            this.speed = Double.valueOf(args.getDouble("speed"))
+            this.speed = Double.valueOf(args.getDouble("speed"));
 
             this.autoPlay = args.getBoolean("autoPlay");
 
