@@ -68,6 +68,10 @@ public class PlayerView implements PlatformView, MethodChannel.MethodCallHandler
                 player.seekTo(call.arguments);
                 result.success(true);
                 break;
+            case "setSpeed":
+                player.setSpeed(call.arguments);
+                result.success(true);
+                break;
             case "dispose":
                 dispose();
                 result.success(true);

@@ -119,6 +119,8 @@ public class PlayerLayout extends PlayerView implements FlutterAVPlayer, EventCh
 
     private String artworkUrl = "";
 
+    private double speed = 1;
+
     private String preferredAudioLanguage = "mul";
 
     private String preferredTextLanguage = "";
@@ -200,6 +202,8 @@ public class PlayerLayout extends PlayerView implements FlutterAVPlayer, EventCh
 
             this.position = Double.valueOf(args.getDouble("position")).intValue();
 
+            this.speed = Double.valueOf(args.getDouble("speed"))
+
             this.autoPlay = args.getBoolean("autoPlay");
 
             this.loop = args.getBoolean("loop");
@@ -250,8 +254,8 @@ public class PlayerLayout extends PlayerView implements FlutterAVPlayer, EventCh
                 .build();
 
         mPlayerView.setPlayWhenReady(this.autoPlay);
-
-        if (this.loop){
+        mPlayerView.setPlaybackSpeed((float) this.speed);
+        if (this.loop) {
             mPlayerView.setRepeatMode(Player.REPEAT_MODE_ONE);
         }
 
@@ -551,7 +555,7 @@ public class PlayerLayout extends PlayerView implements FlutterAVPlayer, EventCh
          * Check for HLS playlist file extension ( .m3u8 or .m3u )
          * https://tools.ietf.org/html/rfc8216
          */
-        if(this.url.contains(".m3u8") || this.url.contains(".m3u")) {
+        if (this.url.contains(".m3u8") || this.url.contains(".m3u")) {
             videoSource = new HlsMediaSource.Factory(dataSourceFactory).createMediaSource(Uri.parse(this.url));
         } else {
             videoSource = new ProgressiveMediaSource.Factory(dataSourceFactory).createMediaSource(Uri.parse(this.url));
@@ -713,6 +717,25 @@ public class PlayerLayout extends PlayerView implements FlutterAVPlayer, EventCh
             }
         } catch (Exception e) { /* ignore */ }
     }
+
+    public void setSpeed(Object arguments) {
+        try {
+
+            java.util.HashMap<String, Double> args = (java.util.HashMap<String, Double>) arguments;
+
+            Double _speed = args.get("speed");
+
+
+            this.speed = _speed;
+
+            if (mPlayerView != null) {
+
+                mPlayerView.setPlaybackSpeed((float) speed);
+            }
+
+        } catch (Exception e) { /* ignore */ }
+    }
+
 
     void onDuration() {
 
