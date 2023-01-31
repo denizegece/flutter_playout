@@ -37,6 +37,7 @@ class Video extends StatefulWidget {
   final String? preferredTextLanguage;
   final bool isLiveStream;
   final double position;
+  final double speed;
   final Function? onViewCreated;
   final PlayerState desiredState;
 
@@ -47,6 +48,7 @@ class Video extends StatefulWidget {
       this.showControls = true,
       this.url,
       this.title = "",
+      this.speed = 0.0,
       this.subtitle = "",
       this.artworkUrl = "",
       this.preferredAudioLanguage = "mul",
@@ -93,6 +95,7 @@ class _VideoState extends State<Video> {
             "showControls": widget.showControls,
             "url": widget.url,
             "title": widget.title ?? "",
+            "speed": widget.speed,
             "subtitle": widget.subtitle ?? "",
             "artworkUrl": widget.artworkUrl ?? "",
             "preferredAudioLanguage": widget.preferredAudioLanguage ?? "mul",
@@ -126,6 +129,7 @@ class _VideoState extends State<Video> {
             "showControls": widget.showControls,
             "url": widget.url,
             "title": widget.title ?? "",
+            "speed":widget.speed,
             "subtitle": widget.subtitle ?? "",
             "artworkUrl": widget.artworkUrl ?? "",
             "preferredAudioLanguage": widget.preferredAudioLanguage ?? "mul",
@@ -157,6 +161,8 @@ class _VideoState extends State<Video> {
     if (oldWidget.url != widget.url ||
         oldWidget.title != widget.title ||
         oldWidget.subtitle != widget.subtitle ||
+        oldWidget.speed != widget.speed ||
+
         oldWidget.isLiveStream != widget.isLiveStream ||
         oldWidget.artworkUrl != widget.artworkUrl) {
       _onMediaChanged();
@@ -172,6 +178,9 @@ class _VideoState extends State<Video> {
     }
     if (oldWidget.preferredTextLanguage != widget.preferredTextLanguage) {
       _onPreferredTextLanguageChanged();
+    }
+    if (oldWidget.speed != widget.speed) {
+      _onSpeedChanged();
     }
     if (oldWidget.position != widget.position && widget.position >= 0) {
       _onSeekPositionChanged();
@@ -237,7 +246,11 @@ class _VideoState extends State<Video> {
       _methodChannel!.invokeMethod("seekTo", {"position": widget.position});
     }
   }
-
+  void _onSpeedChanged() async {
+    if (_methodChannel != null) {
+      _methodChannel!.invokeMethod("setSpeed", {"speed": widget.speed});
+    }
+  }
   void _pausePlayback() async {
     if (_methodChannel != null) {
       _methodChannel!.invokeMethod("pause");
