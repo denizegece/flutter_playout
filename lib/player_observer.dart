@@ -26,6 +26,8 @@ mixin PlayerObserver {
   /// Override this method to get notifications when media has finished playing.
   void onComplete() {/* user implementation */}
 
+  void onBuffering() {/* user implementation */}
+
   /// Override this method to get update when playhead moves. This method
   /// fires every second with [position] as seconds.
   void onTime(int? position) {/* user implementation */}
@@ -63,7 +65,9 @@ mixin PlayerObserver {
       case "onComplete":
         onComplete();
         break;
-
+      case "onBuffering":
+        onBuffering();
+        break;
       /* onTime */
       case "onTime":
         onTime(event["time"].toInt());

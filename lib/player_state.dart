@@ -8,4 +8,6 @@ enum PlayerState {
 
   /// Paused. The user can [resume] the playback without providing the URL.
   PAUSED,
+
+  BUFFERING
 }

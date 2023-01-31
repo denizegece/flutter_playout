@@ -202,7 +202,7 @@ public class PlayerLayout extends PlayerView implements FlutterAVPlayer, EventCh
 
             this.position = Double.valueOf(args.getDouble("position")).intValue();
 
-            this.speed = Double.valueOf(args.getDouble("speed"));
+            this.speed = args.getDouble("speed");
 
             this.autoPlay = args.getBoolean("autoPlay");
 
@@ -926,6 +926,22 @@ public class PlayerLayout extends PlayerView implements FlutterAVPlayer, EventCh
                         message.put("name", "onComplete");
 
                         Log.d(TAG, "onComplete: []");
+                        eventSink.success(message);
+
+                    } catch (Exception e) {
+                        Log.e(TAG, "onComplete: ", e);
+                    }
+                }
+            }else if (playbackState== Player.STATE_BUFFERING){
+                if (eventSink != null) {
+                    try {
+
+                        updatePlaybackState(PlayerState.BUFFERING);
+
+                        JSONObject message = new JSONObject();
+
+                        message.put("name", "onBuffering");
+
                         eventSink.success(message);
 
                     } catch (Exception e) {
