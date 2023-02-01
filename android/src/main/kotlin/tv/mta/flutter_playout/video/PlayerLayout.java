@@ -514,6 +514,12 @@ public class PlayerLayout extends PlayerView implements FlutterAVPlayer, EventCh
             public void run() {
 
                 try {
+                    if(mPlayerView.getPlaybackState()== Player.STATE_BUFFERING){
+                        JSONObject message = new JSONObject();
+                        message.put("name", "onBuffering");
+                        eventSink.success(message);
+                    }
+
 
                     if (mPlayerView.isPlaying()) {
 
@@ -537,7 +543,7 @@ public class PlayerLayout extends PlayerView implements FlutterAVPlayer, EventCh
                 if (isBound) {
 
                     /* keep running if player view is still active */
-                    handler.postDelayed(this, 1000);
+                    handler.postDelayed(this, 200);
                 }
             }
         };
@@ -934,28 +940,6 @@ public class PlayerLayout extends PlayerView implements FlutterAVPlayer, EventCh
 
                     } catch (Exception e) {
                         Log.e(TAG, "onComplete: ", e);
-                    }
-                }
-            } else if (playbackState == 2) {
-                Log.d(TAG, "girdi 1");
-                if (eventSink != null) {
-                    Log.d(TAG, "girdi 2");
-                    try {
-                        Log.d(TAG, "girdi 3.5");
-
-                        updatePlaybackState(PlayerState.BUFFERING);
-
-                        JSONObject message = new JSONObject();
-
-                        message.put("name", "onBuffering");
-
-                        eventSink.success(message);
-
-                        Log.d(TAG, "girdi 4");
-
-
-                    } catch (Exception e) {
-                        Log.d(TAG, "onCompletes: ", e);
                     }
                 }
             }
