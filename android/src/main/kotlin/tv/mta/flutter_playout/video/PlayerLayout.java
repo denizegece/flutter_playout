@@ -941,7 +941,7 @@ public class PlayerLayout extends PlayerView implements FlutterAVPlayer, EventCh
                 if (eventSink != null) {
                     Log.d(TAG, "girdi 2");
                     try {
-                        Log.d(TAG, "girdi 3");
+                        Log.d(TAG, "girdi 3.5");
 
                         updatePlaybackState(PlayerState.BUFFERING);
 
@@ -955,7 +955,7 @@ public class PlayerLayout extends PlayerView implements FlutterAVPlayer, EventCh
 
 
                     } catch (Exception e) {
-                        Log.e(TAG, "onComplete: ", e);
+                        Log.d(TAG, "onCompletes: ", e);
                     }
                 }
             }
