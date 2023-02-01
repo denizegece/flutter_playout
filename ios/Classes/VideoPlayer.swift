@@ -188,7 +188,7 @@ class VideoPlayer: NSObject, FlutterPlugin, FlutterStreamHandler, FlutterPlatfor
 
                             self.speed = parsedData["speed"] as! Double
 
-                            self.player?.rate=self.speed
+                self.player?.rate=Float( self.speed)
 
                             result(true)
                         }
