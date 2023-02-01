@@ -936,7 +936,7 @@ public class PlayerLayout extends PlayerView implements FlutterAVPlayer, EventCh
                         Log.e(TAG, "onComplete: ", e);
                     }
                 }
-            } else if (playbackState == Player.STATE_BUFFERING) {
+            } else if (playbackState == 2) {
                 Log.d(TAG, "girdi 1");
                 if (eventSink != null) {
                     Log.d(TAG, "girdi 2");
