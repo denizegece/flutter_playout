@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 
 /// Use with Video or Audio widget to get player notifications such as
 /// [onPlay], [onPause] etc. See example on how to use.
@@ -48,7 +49,7 @@ mixin PlayerObserver {
 
   void _processEvent(dynamic event) async {
     String? eventName = event["name"];
-
+    debugPrint("event name $eventName");
     switch (eventName) {
 
       /* onPause */
