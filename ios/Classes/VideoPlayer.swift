@@ -72,6 +72,7 @@ class VideoPlayer: NSObject, FlutterPlugin, FlutterStreamHandler, FlutterPlatfor
     var subtitle:String = ""
     var isLiveStream:Bool = false
     var showControls:Bool = false
+    var speed:Double = 1.0
     var position:Double = 0.0
     var artworkUrl :String?
 
@@ -127,6 +128,7 @@ class VideoPlayer: NSObject, FlutterPlugin, FlutterStreamHandler, FlutterPlatfor
         self.isLiveStream = parsedData["isLiveStream"] as! Bool
         self.showControls = parsedData["showControls"] as! Bool
         self.position = parsedData["position"] as! Double
+        self.speed = parsedData["speed"] as! Double
         self.artworkUrl = parsedData["artworkUrl"] as? String
 
         setupPlayer()
@@ -180,7 +182,16 @@ class VideoPlayer: NSObject, FlutterPlugin, FlutterStreamHandler, FlutterPlatfor
 
                 result(true)
             }
+if ("setSpeed" == call.method) {
+                /* data as JSON */
+                let parsedData = call.arguments as! [String: Any]
 
+                self.speed = parsedData["speed"] as! Double
+
+                self.player?.rate = Float(self.speed)
+
+                result(true)
+            }
             if ("onShowControlsFlagChanged" == call.method) {
 
                 /* data as JSON */
