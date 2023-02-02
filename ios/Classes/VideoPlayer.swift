@@ -183,12 +183,13 @@ class VideoPlayer: NSObject, FlutterPlugin, FlutterStreamHandler, FlutterPlatfor
                 result(true)
             }
             if ("setSpeed" == call.method) {
+
                             /* data as JSON */
                             let parsedData = call.arguments as! [String: Any]
 
                             self.speed = parsedData["speed"] as! Double
 
-                self.player?.rate=Float( self.speed)
+                self.player?.rate=Float(self.speed)
 
                             result(true)
                         }
